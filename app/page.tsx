@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Navigation from "./components/landing/Navigation";
 import Hero from "./components/landing/Hero";
 import SocialProof from "./components/landing/SocialProof";
@@ -21,20 +22,22 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen">
-      <Navigation />
-      <Hero onGenerate={scrollToDemo} />
-      <SocialProof />
-      <HowItWorks />
-      <Features />
-      <div ref={demoRef}>
-        <DemoPreview />
-      </div>
-      <Integrations />
-      <Testimonials />
-      <FAQ />
-      <CTASection />
-      <Footer />
-    </main>
+    <ErrorBoundary>
+      <main className="min-h-screen">
+        <Navigation />
+        <Hero onGenerate={scrollToDemo} />
+        <SocialProof />
+        <HowItWorks />
+        <Features />
+        <div ref={demoRef}>
+          <DemoPreview />
+        </div>
+        <Integrations />
+        <Testimonials />
+        <FAQ />
+        <CTASection />
+        <Footer />
+      </main>
+    </ErrorBoundary>
   );
 }
