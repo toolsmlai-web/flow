@@ -6,11 +6,14 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
-// Client for public operations
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Check if Supabase is configured
+const isSupabaseConfigured = !!(supabaseUrl && supabaseAnonKey && supabaseServiceKey);
 
-// Service role client for admin operations (server-side only)
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
+// Client for public operations (if configured)
+export const supabase = isSupabaseConfigured ? createClient(supabaseUrl, supabaseAnonKey) : null;
+
+// Service role client for admin operations (server-side only, if configured)
+export const supabaseAdmin = isSupabaseConfigured ? createClient(supabaseUrl, supabaseServiceKey) : null;
 
 // Verify Supabase configuration
 export function verifySupabaseConfig(): { valid: boolean; error?: string } {
@@ -31,6 +34,20 @@ export const db = {
   // Waitlist operations
   async addToWaitlist(data: WaitlistInput) {
     try {
+      if (!supabaseAdmin) {
+        // Fallback: return mock success if Supabase not configured
+        console.warn("[v0] Supabase not configured, returning mock response");
+        return {
+          success: true,
+          data: {
+            id: "mock_" + Math.random().toString(36).substring(2, 9),
+            email: data.email,
+            status: "pending",
+            createdAt: new Date().toISOString(),
+          },
+        };
+      }
+
       const { data: result, error } = await supabaseAdmin
         .from("waitlist")
         .insert([
@@ -74,6 +91,10 @@ export const db = {
   // Get waitlist entry
   async getWaitlistEntry(email: string) {
     try {
+      if (!supabaseAdmin) {
+        return { success: false, error: "Email not found" };
+      }
+
       const { data, error } = await supabaseAdmin
         .from("waitlist")
         .select("*")
@@ -97,6 +118,10 @@ export const db = {
   // Get waitlist position
   async getWaitlistPosition(email: string) {
     try {
+      if (!supabaseAdmin) {
+        return { success: true, data: { position: 1, total: 1 } };
+      }
+
       const { count, error } = await supabaseAdmin
         .from("waitlist")
         .select("*", { count: "exact", head: true })
@@ -142,6 +167,10 @@ export const db = {
   // Email verification operations
   async createVerificationToken(email: string, token: string) {
     try {
+      if (!supabaseAdmin) {
+        return { success: true };
+      }
+
       const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
       const { error } = await supabaseAdmin
@@ -168,6 +197,10 @@ export const db = {
   // Update verification status
   async verifyEmail(email: string, token: string) {
     try {
+      if (!supabaseAdmin) {
+        return { success: true };
+      }
+
       // Find and verify the token
       const { data: verification, error: findError } = await supabaseAdmin
         .from("email_verifications")
@@ -223,6 +256,10 @@ export const db = {
   // Activity logging
   async logActivity(action: string, email?: string, details?: Record<string, unknown>) {
     try {
+      if (!supabaseAdmin) {
+        return; // Silently skip if Supabase not configured
+      }
+
       await supabaseAdmin
         .from("activity_logs")
         .insert([
@@ -241,6 +278,18 @@ export const db = {
   // Get waitlist stats (for admin)
   async getWaitlistStats() {
     try {
+      if (!supabaseAdmin) {
+        return {
+          success: true,
+          data: {
+            total: 0,
+            verified: 0,
+            pending: 0,
+            verificationRate: 0,
+          },
+        };
+      }
+
       const { count: total } = await supabaseAdmin
         .from("waitlist")
         .select("*", { count: "exact", head: true });

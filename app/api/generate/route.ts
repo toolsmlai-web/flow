@@ -30,24 +30,32 @@ export async function POST(request: NextRequest) {
   const corsHeaders = getCorsHeaders(request);
 
   try {
-    // Rate limiting check
-    const ip = getClientIp(request);
-    const rateLimitResult = await generateRateLimit.limit(ip);
+    // Rate limiting check (if Redis is configured)
+    if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+      const ip = getClientIp(request);
+      try {
+        const rateLimitResult = await generateRateLimit.limit(ip);
 
-    if (!rateLimitResult.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: formatRateLimitError(rateLimitResult),
-        },
-        {
-          status: 429,
-          headers: {
-            ...corsHeaders,
-            "Retry-After": String(rateLimitResult.retryAfter || 3600),
-          },
+        if (!rateLimitResult.success) {
+          const retryAfter = rateLimitResult.reset ? Math.ceil((rateLimitResult.reset - Date.now()) / 1000) : 3600;
+          return NextResponse.json(
+            {
+              success: false,
+              error: formatRateLimitError({ ...rateLimitResult, retryAfter }),
+            },
+            {
+              status: 429,
+              headers: {
+                ...corsHeaders,
+                "Retry-After": String(retryAfter),
+              },
+            }
+          );
         }
-      );
+      } catch (rateLimitError) {
+        console.error("[v0] Rate limiting service unavailable:", rateLimitError);
+        // Continue without rate limiting if service is down (fail open)
+      }
     }
 
     // Parse and validate request body

@@ -45,36 +45,10 @@ export function getClientIp(request: Request | { headers: Headers }): string {
 // Type for rate limit response
 export interface RateLimitResult {
   success: boolean;
-  limit: number;
-  remaining: number;
-  reset: number;
+  limit?: number;
+  remaining?: number;
+  reset?: number;
   retryAfter?: number;
-}
-
-// Unified rate limit check function
-export async function checkRateLimit(
-  limiter: Ratelimit,
-  identifier: string
-): Promise<RateLimitResult> {
-  try {
-    const result = await limiter.limit(identifier);
-    return {
-      success: result.success,
-      limit: result.limit,
-      remaining: result.remaining,
-      reset: result.reset,
-      retryAfter: !result.success ? Math.ceil((result.reset - Date.now()) / 1000) : undefined,
-    };
-  } catch (error) {
-    console.error("[v0] Rate limit check failed:", error);
-    // Fail open - allow request if rate limiting service is down
-    return {
-      success: true,
-      limit: 0,
-      remaining: 0,
-      reset: Date.now(),
-    };
-  }
 }
 
 // Format rate limit error message
