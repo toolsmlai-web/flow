@@ -70,24 +70,24 @@ export default function CTASection() {
   };
 
   return (
-    <section className="py-24 bg-[#0A2540] relative overflow-hidden">
+    <section className="py-24 bg-black relative overflow-hidden border-t border-lime-500/20">
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#635BFF] rounded-full blur-[150px] opacity-20" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#3B82F6] rounded-full blur-[150px] opacity-20" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-lime-400 rounded-full blur-[150px] opacity-10" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-400 rounded-full blur-[150px] opacity-10" />
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white/80 text-sm mb-8">
-            <Sparkles className="w-4 h-4 text-[#635BFF]" />
-            <span>Join 2,000+ teams on the waitlist</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 border border-lime-400/50 text-lime-400 text-sm mb-8 font-mono">
+            <Sparkles className="w-4 h-4 text-lime-400" />
+            <span>2,000+ TEAMS WAITING</span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Ready to transform your<span className="block bg-gradient-to-r from-[#635BFF] to-[#3B82F6] bg-clip-text text-transparent">workflow execution?</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-mono">
+            READY TO TRANSFORM<span className="block bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent">YOUR WORKFLOWS?</span>
           </h2>
 
-          <p className="text-xl text-white/60 mb-12 max-w-2xl mx-auto">Get early access to CheckFlow AI. Be the first to experience the future of AI-powered workflow automation.</p>
+          <p className="text-lg text-white/70 mb-12 max-w-2xl mx-auto">Get early access to CheckFlow AI. Be the first to experience the future of AI-powered workflow automation.</p>
 
           {!submitted ? (
             <form onSubmit={handleSubmit} className="max-w-md mx-auto">
@@ -98,21 +98,21 @@ export default function CTASection() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   disabled={loading}
-                  className="flex-1 px-5 py-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#635BFF] focus:border-transparent transition-all disabled:opacity-50"
+                  className="flex-1 px-5 py-4 border border-lime-400/50 bg-black text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400 transition-all disabled:opacity-50 font-mono"
                 />
                 <button
                   type="submit"
                   disabled={loading || !email.trim()}
-                  className="px-8 py-4 bg-[#635BFF] hover:bg-[#5244e0] disabled:opacity-50 disabled:cursor-not-allowed rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-2 whitespace-nowrap"
+                  className="px-8 py-4 bg-lime-400 hover:bg-lime-300 disabled:opacity-50 disabled:cursor-not-allowed text-black font-bold font-mono transition-all flex items-center justify-center gap-2 whitespace-nowrap uppercase"
                 >
                   {loading ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Joining...</span>
+                      <span>JOINING</span>
                     </>
                   ) : (
                     <>
-                      <span>Get Early Access</span>
+                      <span>ACCESS</span>
                       <ArrowRight className="w-4 h-4" />
                     </>
                   )}
@@ -122,25 +122,25 @@ export default function CTASection() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-3 flex items-center gap-2 px-4 py-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300"
+                  className="mt-3 flex items-center gap-2 px-4 py-3 bg-red-900/30 border border-red-500/50 text-red-300 font-mono"
                 >
                   <AlertCircle className="w-4 h-4 flex-shrink-0" />
                   <p className="text-sm">{error}</p>
                 </motion.div>
               )}
-              <p className="mt-4 text-sm text-white/40">No spam. Unsubscribe anytime. Read our <button type="button" className="underline hover:text-white/60">Privacy Policy</button>.</p>
+              <p className="mt-4 text-sm text-white/50 font-mono">No spam. Read our <button type="button" className="underline hover:text-lime-400">Privacy Policy</button>.</p>
             </form>
           ) : (
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="space-y-4">
-              <div className="inline-flex items-center gap-3 px-8 py-4 bg-emerald-500/20 border border-emerald-500/30 rounded-xl text-emerald-400">
+              <div className="inline-flex items-center gap-3 px-8 py-4 bg-black border-2 border-lime-400 text-lime-400 font-mono">
                 <CheckCircle2 className="w-6 h-6 flex-shrink-0" />
                 <div className="text-left">
-                  <p className="font-semibold">
-                    {alreadyExists ? "You&apos;re already on the list!" : "You&apos;re on the list!"}
+                  <p className="font-bold">
+                    {alreadyExists ? "ALREADY ON LIST!" : "ON THE LIST!"}
                   </p>
-                  <p className="text-sm text-emerald-400/80">We&apos;ll notify you at {email}</p>
+                  <p className="text-sm text-lime-400/80">Notifying at {email}</p>
                   {position && !alreadyExists && (
-                    <p className="text-sm text-emerald-400/60 mt-1">You&apos;re #{position} on the waitlist</p>
+                    <p className="text-sm text-lime-400/60 mt-1">Position: #{position}</p>
                   )}
                 </div>
               </div>
@@ -152,9 +152,9 @@ export default function CTASection() {
                   setAlreadyExists(false);
                   setPosition(null);
                 }}
-                className="w-full px-4 py-2 text-sm text-white/60 hover:text-white/80 transition-colors"
+                className="w-full px-4 py-2 text-sm text-white/60 hover:text-lime-400 transition-colors font-mono"
               >
-                Add another email
+                Add another
               </button>
             </motion.div>
           )}

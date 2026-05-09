@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ 
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-space-mono",
 });
 
 export const metadata: Metadata = {
@@ -69,12 +75,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${spaceMono.variable} bg-black`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased bg-black text-white`}>
         {children}
       </body>
     </html>

@@ -29,28 +29,28 @@ export default function Hero({ onGenerate }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0A2540]">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#635BFF] rounded-full blur-[128px] opacity-20 animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#3B82F6] rounded-full blur-[128px] opacity-20 animate-pulse" style={{ animationDelay: "500ms" }} />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-lime-400 rounded-full blur-[128px] opacity-10 animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-400 rounded-full blur-[128px] opacity-10 animate-pulse" style={{ animationDelay: "500ms" }} />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white/80 text-sm mb-8 backdrop-blur-sm">
-          <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-          <span>AI-Powered Workflow Platform</span>
-          <span className="px-2 py-0.5 bg-[#635BFF] rounded-full text-xs font-medium">New</span>
+          className="inline-flex items-center gap-2 px-4 py-2 border border-lime-400/50 text-lime-400 text-sm mb-8 font-mono">
+          <span className="w-2 h-2 bg-lime-400 rounded-full animate-pulse" />
+          <span>AI-POWERED WORKFLOW PLATFORM</span>
+          <span className="px-2 py-0.5 bg-lime-400 text-black text-xs font-bold">NEW</span>
         </motion.div>
 
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-          <span className="block">Describe it.</span>
-          <span className="block bg-gradient-to-r from-[#635BFF] via-[#8B5CF6] to-[#3B82F6] bg-clip-text text-transparent">Build it. Run it.</span>
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight font-mono">
+          <span className="block">DESCRIBE IT.</span>
+          <span className="block bg-gradient-to-r from-lime-400 via-cyan-400 to-lime-400 bg-clip-text text-transparent">BUILD IT. RUN IT.</span>
         </motion.h1>
 
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl text-white/60 max-w-2xl mx-auto mb-12">
+          className="text-lg text-white/70 max-w-2xl mx-auto mb-12">
           One prompt generates your entire workflow. Visual nodes, live connections, AI automation, and a self-checking checklist. No code. Ever.
         </motion.p>
 
@@ -59,18 +59,18 @@ export default function Hero({ onGenerate }: HeroProps) {
             <div className="relative">
               <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleGenerate()}
                 placeholder="Build me a system to launch an AI SaaS..."
-                className="w-full px-6 py-5 pr-40 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#635BFF] focus:border-transparent transition-all text-lg backdrop-blur-sm" />
+                className="w-full px-6 py-5 pr-40 border border-lime-400/50 bg-black text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400 transition-all text-lg font-mono" />
               <button onClick={handleGenerate} disabled={!input.trim() || loading}
-                className="absolute right-2 top-2 px-6 py-3 bg-[#635BFF] hover:bg-[#5244e0] disabled:opacity-50 disabled:cursor-not-allowed rounded-xl font-semibold text-white transition-all flex items-center gap-2">
-                {loading ? <><Loader2 className="w-4 h-4 animate-spin" /><span>Generating...</span></> : <><Sparkles className="w-4 h-4" /><span>Generate</span></>}
+                className="absolute right-2 top-2 px-6 py-3 bg-lime-400 hover:bg-lime-300 disabled:opacity-50 disabled:cursor-not-allowed text-black font-bold font-mono transition-all flex items-center gap-2 uppercase">
+                {loading ? <><Loader2 className="w-4 h-4 animate-spin" /><span>GENERATING</span></> : <><Sparkles className="w-4 h-4" /><span>GENERATE</span></>}
               </button>
             </div>
           ) : (
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-              className="flex items-center justify-center gap-3 px-6 py-4 bg-emerald-500/20 border border-emerald-500/30 rounded-2xl text-emerald-400">
+              className="flex items-center justify-center gap-3 px-6 py-4 bg-black border-2 border-lime-400 text-lime-400 font-mono">
               <CheckCircle2 className="w-5 h-5" />
-              <span className="font-medium">Workflow generated successfully!</span>
-              <button onClick={() => setSubmitted(false)} className="ml-4 text-sm underline hover:text-emerald-300">Create another</button>
+              <span className="font-bold">WORKFLOW GENERATED!</span>
+              <button onClick={() => setSubmitted(false)} className="ml-4 text-sm underline hover:text-lime-300">Create another</button>
             </motion.div>
           )}
         </motion.div>

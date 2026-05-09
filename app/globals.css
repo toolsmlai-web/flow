@@ -3,36 +3,42 @@
 @tailwind utilities;
 
 :root {
-  /* Stripe-Style Color Palette */
-  --primary-purple: 252 100% 64%;
-  --primary-blue: 233 100% 64%;
-  --accent-coral: 6 100% 71%;
-  --accent-emerald: 160 84% 39%;
-  --navy-deep: 213 47% 14%;
+  /* Cyberpunk Color Palette */
+  --primary-neon: 71 100% 50%;
+  --primary-lime: 75 98% 51%;
+  --accent-cyan: 188 94% 50%;
+  --accent-magenta: 288 100% 50%;
+  --bg-black: 0 0% 0%;
+  --bg-dark: 0 0% 5%;
+  --text-white: 0 0% 100%;
+  --text-gray: 0 0% 70%;
 
   /* Semantic Tokens */
-  --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
-  --primary: var(--primary-purple);
-  --primary-foreground: 0 0% 100%;
+  --background: var(--bg-black);
+  --foreground: var(--text-white);
+  --primary: var(--primary-lime);
+  --primary-foreground: var(--bg-black);
 
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #635BFF 0%, #8B5CF6 50%, #3B82F6 100%);
-  --gradient-coral: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+  --gradient-hero: linear-gradient(135deg, #CCFF00 0%, #00FF88 100%);
+  --gradient-neon: linear-gradient(90deg, #CCFF00 0%, #00FFFF 100%);
 }
 
 @layer base {
   * {
-    @apply border-slate-200;
+    @apply border-lime-500/30;
   }
 
   html {
     scroll-behavior: smooth;
+    background-color: #000000;
   }
 
   body {
-    @apply bg-white text-slate-900 antialiased;
+    @apply bg-black text-white antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background: #000000;
+    color: #ffffff;
   }
 }
 
@@ -43,14 +49,26 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-white transition-all duration-200;
-    background: linear-gradient(135deg, #635BFF 0%, #3B82F6 100%);
-    box-shadow: 0 4px 14px 0 rgba(99, 91, 255, 0.39);
+    @apply inline-flex items-center justify-center px-6 py-3 rounded font-bold text-black transition-all duration-200 uppercase tracking-wider;
+    background: #CCFF00;
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.5), inset 0 0 10px rgba(204, 255, 0, 0.2);
+    border: 2px solid #CCFF00;
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px 0 rgba(99, 91, 255, 0.5);
+    box-shadow: 0 0 30px rgba(204, 255, 0, 0.8), inset 0 0 15px rgba(204, 255, 0, 0.4);
+    background: #DDFF33;
+    border-color: #DDFF33;
+  }
+
+  .neon-border {
+    @apply border border-lime-400;
+    box-shadow: 0 0 10px rgba(204, 255, 0, 0.3), inset 0 0 5px rgba(204, 255, 0, 0.1);
+  }
+
+  .neon-glow {
+    text-shadow: 0 0 10px #CCFF00, 0 0 20px #CCFF00;
   }
 }
 
@@ -73,18 +91,20 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-100;
+  @apply bg-black;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-400 rounded;
+  @apply bg-lime-400 rounded;
+  box-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-600;
+  @apply bg-lime-300;
+  box-shadow: 0 0 15px rgba(204, 255, 0, 0.8);
 }
 
 ::selection {
-  background: rgba(99, 91, 255, 0.2);
-  color: #0A2540;
+  background: rgba(204, 255, 0, 0.3);
+  color: #000000;
 }
