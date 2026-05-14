@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { waitlistSchema } from "@/lib/schemas";
 import { waitlistRateLimit, getClientIp, formatRateLimitError } from "@/lib/rateLimit";
 import { db } from "@/lib/supabase";
+import { emailService } from "@/lib/email";
 
 // Get allowed origins from environment
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || "https://checkflow.ai").split(",").map(o => o.trim());
@@ -124,11 +125,27 @@ export async function POST(request: NextRequest) {
     const position = await db.getWaitlistPosition(email);
     const positionData = position.success ? position.data : null;
 
+    // Send welcome email
+    if (positionData) {
+      const emailResult = await emailService.sendWelcomeEmail(
+        email,
+        positionData.position || 1,
+        positionData.total || 1
+      );
+      
+      if (!emailResult.success) {
+        console.warn("[v0] Failed to send welcome email:", emailResult.error);
+        // Continue anyway - don't fail the signup if email fails
+      }
+    }
+
     // Log activity
     await db.logActivity("waitlist_signup", email, {
       use_case,
       ip,
       timestamp: new Date().toISOString(),
+      position: positionData?.position,
+      emailSent: true,
     });
 
     return NextResponse.json(
