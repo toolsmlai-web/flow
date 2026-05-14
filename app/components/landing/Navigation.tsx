@@ -21,35 +21,31 @@ export default function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm" : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+          scrolled ? "bg-black/90 backdrop-blur-xl border-lime-500/30" : "bg-black/50 border-lime-500/20"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             <a href="#" className="flex items-center gap-2">
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold ${
-                scrolled ? "bg-gradient-to-br from-[#635BFF] to-[#3B82F6]" : "bg-white/20 backdrop-blur"
-              }`}>CF</div>
-              <span className={`font-bold text-xl ${scrolled ? "text-slate-900" : "text-white"}`}>CheckFlow AI</span>
+              <div className="w-8 h-8 border-2 border-lime-400 flex items-center justify-center text-lime-400 font-bold font-mono text-xs">CF</div>
+              <span className="font-bold text-xl text-lime-400 font-mono">CHECKFLOW</span>
             </a>
 
             <div className="hidden md:flex items-center gap-8">
               {NAV_LINKS.map((link) => (
-                <a key={link.name} href={link.href} className={`text-sm font-medium transition-colors hover:text-[#635BFF] ${
-                  scrolled ? "text-slate-600" : "text-white/80"
-                }`}>{link.name}</a>
+                <a key={link.name} href={link.href} className="text-sm font-medium transition-all text-white/70 hover:text-lime-400 hover:glow">{link.name}</a>
               ))}
             </div>
 
             <div className="hidden md:flex items-center gap-4">
-              <button className={`text-sm font-medium transition-colors ${scrolled ? "text-slate-600 hover:text-slate-900" : "text-white/80 hover:text-white"}`}>Sign In</button>
-              <button className="px-5 py-2.5 bg-[#635BFF] hover:bg-[#5244e0] text-white text-sm font-semibold rounded-xl transition-all flex items-center gap-2">
-                <Zap className="w-4 h-4" />Get Started
+              <button className="text-sm font-medium transition-all text-white/70 hover:text-lime-400">Sign In</button>
+              <button className="px-5 py-2.5 bg-lime-400 hover:bg-lime-300 text-black text-sm font-bold font-mono rounded transition-all flex items-center gap-2 uppercase tracking-wider">
+                <Zap className="w-4 h-4" />Start
               </button>
             </div>
 
-            <button onClick={() => setIsOpen(!isOpen)} className={`md:hidden p-2 rounded-lg ${scrolled ? "text-slate-600" : "text-white"}`}>
+            <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 rounded text-lime-400 hover:text-lime-300">
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
@@ -59,17 +55,17 @@ export default function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-0 top-16 z-40 bg-white border-b border-slate-200 shadow-lg md:hidden">
+            className="fixed inset-x-0 top-16 z-40 bg-black border-b border-lime-500/30 shadow-lg md:hidden">
             <div className="px-4 py-6 space-y-4">
               {NAV_LINKS.map((link) => (
                 <a key={link.name} href={link.href} onClick={() => setIsOpen(false)}
-                  className="block px-4 py-3 text-slate-600 hover:text-[#635BFF] hover:bg-slate-50 rounded-xl font-medium transition-colors">{link.name}</a>
+                  className="block px-4 py-3 text-white/70 hover:text-lime-400 font-medium transition-colors">{link.name}</a>
               ))}
-              <hr className="border-slate-200" />
+              <hr className="border-lime-500/20" />
               <div className="space-y-3 px-4">
-                <button className="w-full py-3 text-slate-600 font-medium">Sign In</button>
-                <button className="w-full py-3 bg-[#635BFF] text-white font-semibold rounded-xl flex items-center justify-center gap-2">
-                  <Zap className="w-4 h-4" />Get Started
+                <button className="w-full py-3 text-white/70 font-medium hover:text-lime-400">Sign In</button>
+                <button className="w-full py-3 bg-lime-400 text-black font-bold font-mono rounded flex items-center justify-center gap-2 uppercase">
+                  <Zap className="w-4 h-4" />Start
                 </button>
               </div>
             </div>

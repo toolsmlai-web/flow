@@ -10,25 +10,32 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+        mono: ["var(--font-space-mono)", "monospace"],
       },
       colors: {
         primary: {
-          DEFAULT: "#635BFF",
-          50: "#f5f3ff",
-          100: "#ede9fe",
-          200: "#ddd6fe",
-          300: "#c4b5fd",
-          400: "#a78bfa",
-          500: "#8b5cf6",
-          600: "#7c3aed",
-          700: "#6d28d9",
-          800: "#5b21b6",
-          900: "#4c1d95",
+          DEFAULT: "#CCFF00",
+          50: "#FFFFF0",
+          100: "#FFFFE6",
+          200: "#FFFFCC",
+          300: "#FFFF99",
+          400: "#FFFF66",
+          500: "#FFFF33",
+          600: "#FFFF00",
+          700: "#CCFF00",
+          800: "#99CC00",
+          900: "#669900",
         },
-        navy: {
-          900: "#0A2540",
-          800: "#1e293b",
-          700: "#334155",
+        neon: {
+          lime: "#CCFF00",
+          cyan: "#00FFFF",
+          magenta: "#FF00FF",
+          white: "#FFFFFF",
+        },
+        cyberpunk: {
+          black: "#000000",
+          dark: "#0A0A0A",
+          darker: "#050505",
         },
       },
       animation: {

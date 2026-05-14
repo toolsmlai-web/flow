@@ -13,37 +13,37 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-950 text-slate-400 py-16 border-t border-slate-900">
+    <footer className="bg-black text-white/70 py-16 border-t border-lime-500/20 font-mono">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-[#635BFF] to-[#3B82F6] rounded-lg flex items-center justify-center text-white font-bold">CF</div>
-              <span className="text-white font-bold text-xl">CheckFlow AI</span>
+              <div className="w-8 h-8 border-2 border-lime-400 flex items-center justify-center text-lime-400 font-bold text-xs">CF</div>
+              <span className="text-lime-400 font-bold text-lg">CHECKFLOW</span>
             </div>
-            <p className="text-sm mb-6 max-w-xs">AI-powered workflow automation platform. Turn prompts into executable workflows with visual nodes and smart checklists.</p>
+            <p className="text-sm mb-6 max-w-xs text-white/60">AI-powered workflow automation. Turn prompts into executable workflows with visual nodes and smart checklists.</p>
             <div className="flex gap-4">
               {[Twitter, Github, Linkedin, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-lg bg-slate-900 hover:bg-slate-800 flex items-center justify-center transition-colors"><Icon className="w-5 h-5" /></a>
+                <a key={i} href="#" className="w-10 h-10 border border-lime-400/50 hover:border-lime-400 hover:text-lime-400 flex items-center justify-center transition-colors text-white/70"><Icon className="w-5 h-5" /></a>
               ))}
             </div>
           </div>
           {Object.entries(links).map(([category, items]) => (
             <div key={category}>
-              <h4 className="text-white font-semibold mb-4">{category}</h4>
+              <h4 className="text-lime-400 font-bold mb-4">{category}</h4>
               <ul className="space-y-2">
                 {items.map((item) => (
-                  <li key={item}><a href="#" className="text-sm hover:text-white transition-colors">{item}</a></li>
+                  <li key={item}><a href="#" className="text-sm text-white/60 hover:text-lime-400 transition-colors">{item}</a></li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-        <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm">© 2024 CheckFlow AI. All rights reserved.</p>
-          <div className="flex items-center gap-2 text-sm">
-            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-            <span>All systems operational</span>
+        <div className="pt-8 border-t border-lime-500/20 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-white/50">© 2024 CHECKFLOW. ALL RIGHTS RESERVED.</p>
+          <div className="flex items-center gap-2 text-sm text-lime-400">
+            <span className="w-2 h-2 bg-lime-400 rounded-full animate-pulse" />
+            <span>SYSTEMS OPERATIONAL</span>
           </div>
         </div>
       </div>
